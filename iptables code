@@ -1,0 +1,1 @@
+sudo iptables -t nat -A OUTPUT -d [Simulated Machine IP (Random) ] -j DNAT --to-destination [Host-IP]
