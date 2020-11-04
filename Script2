@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# get host IP
+hostIp=$(hostname -I)
+echo host ip: $hostIp
+
+#get subnet
+netmask=$(ifconfig "eth0" | awk '/netmask/{ print $4;}')
+echo netmask: $netmask
+
+#converts ip from decimal to binary format.
+function convip()
+{
+    CONV=({0..1}{0..1}{0..1}{0..1}{0..1}{0..1}{0..1}{0..1})
+
+    ip=""
+    for byte in `echo ${1} | tr "." " "`; do
+        ip="${ip}.${CONV[${byte}]}"
+    done
+    echo ${ip:1}
+}
+
+a=`convip "${hostIp}"`
+echo "Host IP Binary: ${a}"
+
+b=`convip "${netmask}"`
+echo "Netmask Binary: ${b}"
+
+exit
