@@ -1,0 +1,17 @@
+echo "Running iptables Script for the following 5 ip addresses:"
+
+echo "10.1.50.151"
+echo "10.1.50.152"
+echo "10.1.50.153"
+echo "10.1.50.154"
+echo "10.1.50.155"
+
+sudo iptables -t nat -A OUTPUT -d 10.1.50.151 -j DNAT --to-destination 10.1.57.146
+
+sudo iptables -t nat -A OUTPUT -d 10.1.50.152 -j DNAT --to-destination 10.1.57.146
+
+sudo iptables -t nat -A OUTPUT -d 10.1.50.153 -j DNAT --to-destination 10.1.57.146
+
+sudo iptables -t nat -A OUTPUT -d 10.1.50.154 -j DNAT --to-destination 10.1.57.146
+
+sudo iptables -t nat -A OUTPUT -d 10.1.50.155 -j DNAT --to-destination 10.1.57.146
