@@ -1,0 +1,42 @@
+host ip: 10.1.57.146
+netmask: 255.255.240.0
+Host IP Binary: 00001010000000010011100110010010
+Netmask Binary: 11111111111111111111000000000000
+
+Min Hosts: 5
+Max Hosts: 15
+Student ID: 924151
+
+Sum of Student ID: 22
+
+Netmask Binary: 11111111111111111111000000000000
+Count in String: 32
+Number of Zeroes in Netmask/Number of Bits Available: 12
+Number of Ones in Netmask: 20
+Max Range: 4096
+Random: 9306
+Random Hosts Current: 930
+Random Hosts Current: 93
+Random Hosts Current: 9
+Host Number: 9
+5 < 9 < 15
+
+Left Side of IP: 00001010000000010011
+HostIP: 10.1.57.146
+New IP: 10.1.55.171
+HostIP: 10.1.57.146
+New IP: 10.1.50.156
+HostIP: 10.1.57.146
+New IP: 10.1.61.141
+HostIP: 10.1.57.146
+New IP: 10.1.56.126
+HostIP: 10.1.57.146
+New IP: 10.1.51.111
+HostIP: 10.1.57.146
+New IP: 10.1.62.96
+HostIP: 10.1.57.146
+New IP: 10.1.57.81
+HostIP: 10.1.57.146
+New IP: 10.1.52.66
+HostIP: 10.1.57.146
+New IP: 10.1.63.51
