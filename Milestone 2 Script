@@ -1,0 +1,139 @@
+#!/bin/bash
+
+# get host IP
+hostIp=$(hostname -I)
+echo host ip: $hostIp
+
+#get subnet
+netmask=$(ifconfig "eth0" | awk '/netmask/{ print $4;}')
+echo netmask: $netmask
+
+#converts ip from decimal to binary format.
+function convip()
+{
+    CONV=({0..1}{0..1}{0..1}{0..1}{0..1}{0..1}{0..1}{0..1})
+
+
+    ip=""
+    for byte in `echo ${1} | tr "." " "`; do
+        ip="${ip}${CONV[${byte}]}"
+    done
+    echo ${ip}
+}
+
+HostBinary=`convip "${hostIp}"`
+echo "Host IP Binary: ${HostBinary}"
+
+NetmaskBinary=`convip "${netmask}"`
+echo "Netmask Binary: ${NetmaskBinary}"
+
+
+##
+
+# copyIPBinary=${HostBinary}
+# echo "Copy IP Binary: ${copyIPBinary}"
+
+
+####################################################################
+
+read -p "Minimum Number of Hosts: " Min_Hosts
+read -p "Maximum Number of Hosts: " Max_Hosts
+read -p "Student ID: " Student_ID
+
+echo
+echo Min Hosts: $Min_Hosts
+echo Max Hosts: $Max_Hosts
+echo Student ID: $Student_ID
+echo
+
+Sum_Of_ID=0
+while [ $Student_ID -gt 0 ]
+do
+	remainder=$(( $Student_ID % 10 ))
+	Student_ID=$(( $Student_ID / 10 ))
+	Sum_Of_ID=$(( $Sum_Of_ID + $remainder ))
+done
+
+echo Sum of Student ID: $Sum_Of_ID
+echo
+
+##################################################
+
+echo Netmask Binary: $NetmaskBinary
+IPBinLength=${#NetmaskBinary}
+echo Count in String: $IPBinLength
+
+NumZerosInNetmask="$(awk -F"0" '{print NF-1}' <<< "${NetmaskBinary}")"
+echo Number of Zeroes in Netmask/Number of Bits Available: $NumZerosInNetmask
+NumOnesInNetmask=$(( 32-$NumZerosInNetmask ))
+echo Number of Ones in Netmask: $NumOnesInNetmask
+
+Min_Range=0 # Change Later?
+Max_Range=$(( 2**$NumZerosInNetmask ))
+
+echo Max Range: $Max_Range
+
+######################
+
+RANDOM=$Sum_Of_ID
+Random_Student_Sum=$RANDOM
+echo Random: $Random_Student_Sum
+
+# Get Number of Hosts
+Num_Hosts=$Random_Student_Sum
+while [ "$Num_Hosts" -gt "$Max_Hosts" -o "$Num_Hosts" -lt "$Min_Hosts" ]
+do
+	if [ $Num_Hosts -gt $Max_Hosts ]
+	then
+		Num_Hosts=$(( $Num_Hosts / 10 ))
+	elif [ $Num_Hosts -lt $Min_Hosts ]
+	then
+		Num_Hosts=$(( $Num_Hosts * 5 ))
+	fi
+	echo Random Hosts Current: $Num_Hosts
+done
+
+echo Host Number: $Num_Hosts
+echo $Min_Hosts "<" $Num_Hosts "<" $Max_Hosts
+echo
+
+
+############################################################
+
+# Making Random IPs!
+
+NewIP_LeftMost=${HostBinary:0:$NumOnesInNetmask}
+echo Left Side of IP: $NewIP_LeftMost
+
+
+function toBinary() {
+	local n bit
+	for (( n=$1 ; n>0 ; n >>= 1 )); do bit="$(( n&1 ))$bit"; done
+	printf "%s\n" "$bit"
+}
+
+for ((i=1; i<=$Num_Hosts; i++))
+do
+	Seed=$(( $Random_Student_Sum + $i ))
+	RANDOM=$Seed
+
+	Rand1=$RANDOM
+	RANDOM=$Rand1
+	Rand2=$RANDOM
+
+	Rand1Bin=`toBinary "${Rand1}"`
+	Rand2Bin=`toBinary "${Rand2}"`
+	RandBinCat="$Rand1Bin$Rand2Bin"
+
+	NewIP_RightMost=${RandBinCat: -$NumZerosInNetmask}
+	NewIPBin="$NewIP_LeftMost$NewIP_RightMost"
+
+	NewIP="$((2#${NewIPBin:0:8})).$((2#${NewIPBin:8:8})).$((2#${NewIPBin:16:8})).$((2#${NewIPBin:24:8}))"
+	
+	echo HostIP: $hostIp
+	echo New IP: $NewIP
+
+
+	# Ladies and Gentlemen, The IPTables Code!!!!!
+	sudo iptables -t nat -A OUTPUT -d $NewIP -j DNAT --to-destination $hostIp
+done
