@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Author: Kevin Quirici
+# Date: 12-06-2020
+# Script for CPSC 498 CAPSTONE Project
+# Create Random Seeded Simulated IPs that appear on a network scan
+# That simulate a local machine
+#
+# HostAndSubnetScript.sh > Retrieves Host IP, Subnet Address, and collects both in Binary Form.
+#
+# Returns 4 variables: hostIP, netmask, HostBinary, NetmaskBinary
+
+###################################################################################
+
 # get host IP
 hostIP=$(hostname -I)
 

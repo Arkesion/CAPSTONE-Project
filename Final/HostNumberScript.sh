@@ -1,6 +1,17 @@
 #!/bin/bash
 
-#Using Seeded Randomization, Choose the Number of Hosts (Within given range) To open.
+
+# Author: Kevin Quirici
+# Date: 12-06-2020
+# Script for CPSC 498 CAPSTONE Project
+# Create Random Seeded Simulated IPs that appear on a network scan
+# That simulate a local machine
+#
+# HostNumberScript.sh: Creates a Seeded Random Number with the sum of digits in Student ID, and chooses the number of hosts to open within the range.
+#
+# Returns 2 variables: Random_Student_Sum, Num_Hosts
+
+#######################################################################
 
 RANDOM=$Sum_Of_ID
 Random_Student_Sum=$RANDOM

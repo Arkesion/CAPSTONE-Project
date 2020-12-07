@@ -1,11 +1,16 @@
 #!/bin/bash
 
-
-
-
-
+# Author: Kevin Quirici
+# Date: 12-06-2020
+# Script for CPSC 498 CAPSTONE Project
+# Create Random Seeded Simulated IPs that appear on a network scan
+# That simulate a local machine
+#
+# MasterScript.sh > Master Script that calls the other required scripts in
+# Order to run the full program.
 
 #######################################################################
+
 # HostAndSubnetScript.sh
 # Grabs the Host IP and Netmask, converting both into binary
 # Returns 4 variables: hostIP, netmask, HostBinary, NetmaskBinary
@@ -55,7 +60,7 @@ echo
 # HostNumberScript.sh
 # Using the seeded value of the Sum of a Students ID, chooses a random number
 # Within the range of Minimum and Maximum Hosts, to determine how many to open
-# Returns 1 variable: Random_Student_Sum, Num_Hosts
+# Returns 2 variables: Random_Student_Sum, Num_Hosts
 
 export Random_Student_Sum
 export Num_Hosts
@@ -89,4 +94,14 @@ echo
 # Create Simulated Machines
 # Returns 0 variables
 
-source CreateIPScript.sh
+# For professor/grading machine-
+# Inputing a "--grade" flag into will create a list of outputs of the random IPs, for testing.
+
+# Check for --grade flag
+if [ "$1" == "--grade" ]; then
+	echo "Grade Flag Accepted"
+	source CreateIPScript.sh --grade
+else
+	source CreateIPScript.sh
+fi
+

@@ -1,7 +1,23 @@
 #!/bin/bash
 
+# Author: Kevin Quirici
+# Date: 12-06-2020
+# Script for CPSC 498 CAPSTONE Project
+# Create Random Seeded Simulated IPs that appear on a network scan
+# That simulate a local machine
+#
+# StudentIDScript.sh: Asks for Student ID, saves it and sums the digits up.
+#
+# Returns 2 variables: Student_ID, Sum_Of_ID
+
+#########################################################################
+
 # Grabs Student ID
 read -p "Enter Student ID: " Student_ID
+while  ! [[ "$Student_ID" =~ ^[0-9]+$ ]] ; do
+	echo "Please input a number"
+	read -p "Minimum Number of Hosts: " Student_ID
+done
 
 # Removes any leading zeros
 Student_ID=$(echo $Student_ID | sed 's/^0*//')
