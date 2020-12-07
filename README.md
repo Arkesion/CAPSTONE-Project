@@ -1,5 +1,7 @@
 Random Seeded Simulated Machines
+
 A CAPSTONE Project by Kevin Quirici
+
 For CPSC 498 at Christopher Newport University: Fall 2020
 
 ------------------------------
@@ -14,7 +16,7 @@ Thats it!
 Using the Program:
 To run the code, you must run the Master Script.
 
-This Can be done in linux by opening a terminal in the location of the project and
+This can be done in linux by opening a terminal in the location of the project and
 typing "./MasterScript.sh" before pressing enter.
 
 (You might need to chmod the scripts in order to have them run. This can be done for each script by typing
