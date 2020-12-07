@@ -21,16 +21,15 @@ while  ! [[ "$Min_Hosts" =~ ^[0-9]+$ ]] ; do
 done
 
 read -p "Maximum Number of Hosts: " Max_Hosts
-while  ! [[ "$Max_Hosts" =~ ^[0-9]+$ ]] ; do
-	echo "Please input a number"
+while  ! [[ "$Max_Hosts" =~ ^[0-9]+$ ]] || [[ "$Max_Hosts" -lt "$Min_Hosts" ]] ; do
+	if ! [[ "$Max_Hosts" =~ ^[0-9]+$ ]]
+	then
+		echo "Please input a number"
+	else
+		echo "Max Hosts must be larger than Min Hosts"
+	fi
 	read -p "Maximum Number of Hosts: " Max_Hosts
 done
-
-while [ "$Max_Hosts" -lt "$Min_Hosts" ] ; do
-	echo "Max Hosts must be larger than Min Hosts"
-	read -p "Maximum Number of Hosts: " Max_Hosts
-done
-
 
 # echo Min Hosts: $Min_Hosts
 # echo Max Hosts: $Max_Hosts
