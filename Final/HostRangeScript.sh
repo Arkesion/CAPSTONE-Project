@@ -15,10 +15,11 @@
 
 # Get Host Min and Max Number
 read -p "Minimum Number of Hosts: " Min_Hosts
-while  ! [[ "$Min_Hosts" =~ ^[0-9]+$ ]] ; do
+while  ! [[ "$Min_Hosts" =~ ^[0-9]+$ ]] || [[ "$Min_Hosts" -le 0 ]] ; do
 	echo "Please input a Positive Whole Number"
 	read -p "Minimum Number of Hosts: " Min_Hosts
 done
+Min_Hosts=$(echo $Min_Hosts | sed 's/^0*//')
 
 read -p "Maximum Number of Hosts: " Max_Hosts
 while  ! [[ "$Max_Hosts" =~ ^[0-9]+$ ]] || [[ "$Max_Hosts" -lt "$Min_Hosts" ]] ; do
@@ -30,6 +31,7 @@ while  ! [[ "$Max_Hosts" =~ ^[0-9]+$ ]] || [[ "$Max_Hosts" -lt "$Min_Hosts" ]] ;
 	fi
 	read -p "Maximum Number of Hosts: " Max_Hosts
 done
+Max_Hosts=$(echo $Max_Hosts | sed 's/^0*//')
 
 # echo Min Hosts: $Min_Hosts
 # echo Max Hosts: $Max_Hosts

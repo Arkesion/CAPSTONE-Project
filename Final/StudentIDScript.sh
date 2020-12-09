@@ -14,7 +14,7 @@
 
 # Grabs Student ID
 read -p "Enter Student ID: " Student_ID
-while  ! [[ "$Student_ID" =~ ^[0-9]+$ ]] ; do
+while  ! [[ "$Student_ID" =~ ^[0-9]+$ ]] || [[ "$Student_ID" -le 0 ]] ; do
 	echo "Please input a Positive Whole Number"
 	read -p "Minimum Number of Hosts: " Student_ID
 done
