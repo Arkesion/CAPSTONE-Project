@@ -16,7 +16,7 @@
 # Get Host Min and Max Number
 read -p "Minimum Number of Hosts: " Min_Hosts
 while  ! [[ "$Min_Hosts" =~ ^[0-9]+$ ]] ; do
-	echo "Please input a number"
+	echo "Please input a Positive Whole Number"
 	read -p "Minimum Number of Hosts: " Min_Hosts
 done
 
@@ -24,7 +24,7 @@ read -p "Maximum Number of Hosts: " Max_Hosts
 while  ! [[ "$Max_Hosts" =~ ^[0-9]+$ ]] || [[ "$Max_Hosts" -lt "$Min_Hosts" ]] ; do
 	if ! [[ "$Max_Hosts" =~ ^[0-9]+$ ]]
 	then
-		echo "Please input a number"
+		echo "Please input a Positive Whole Number"
 	else
 		echo "Max Hosts must be larger than Min Hosts"
 	fi
