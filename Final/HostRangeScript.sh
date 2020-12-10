@@ -15,7 +15,7 @@
 
 # Get Host Min and Max Number
 read -p "Minimum Number of Hosts: " Min_Hosts
-while  ! [[ "$Min_Hosts" =~ ^[0-9]+$ ]] || [[ "$Min_Hosts" -le 0 ]] ; do
+while  ! [[ "$Min_Hosts" =~ ^[0-9]+$ ]] || [[ "$Min_Hosts" == 0 ]] ; do
 	echo "Please input a Positive Whole Number"
 	read -p "Minimum Number of Hosts: " Min_Hosts
 done

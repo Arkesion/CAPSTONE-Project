@@ -52,6 +52,7 @@ export Sum_Of_ID
 
 source StudentIDScript.sh
 
+# Commented out because it creates some confusion if reading.
 echo Student ID: $Student_ID
 echo Sum of Student ID: $Sum_Of_ID
 echo
@@ -67,7 +68,7 @@ export Num_Hosts
 
 source HostNumberScript.sh
 
-echo Host Number: $Min_Hosts "<" $Num_Hosts "<" $Max_Hosts
+echo Host Number: $Min_Hosts "<=" $Num_Hosts "<=" $Max_Hosts
 echo
 
 ########################################################################
